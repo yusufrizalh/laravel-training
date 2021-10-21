@@ -20,8 +20,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="title">Body</label>
-                                <textarea name="body" id="body" class="form-control is-invalid"
-                                    value="{{ old('body') ?? $post->body }}"></textarea>
+                                <textarea name="body" id="body"
+                                    class="form-control is-invalid">{{ old('body') ?? $post->body }}</textarea>
                                 @error('body')
                                     {{ $message }}
                                 @enderror

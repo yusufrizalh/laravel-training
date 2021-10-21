@@ -108,9 +108,10 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
+
     public function edit(Post $post)
     {
-        //
+        return view('posts/edit', compact('post'));
     }
 
     /**
@@ -120,9 +121,21 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+
+    public function update(Post $post)
     {
-        //
+        // testing proses update
+        // dd('berhasil update');
+
+        $attrs = request()->validate([
+            'title' => 'required|min:8|max:38',
+            'body' => 'required',
+        ]);
+
+        $post->update($attrs);
+        session()->flash('success', 'Post berhasil diubah!');
+
+        return redirect('/posts');
     }
 
     /**

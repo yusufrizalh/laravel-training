@@ -14,4 +14,11 @@ class Post extends Model
 
     protected $fillable = ['title', 'slug', 'body'];
     // protected $guarded = [];
+
+    // membuat foreign key
+    public function category()
+    {
+        // return $this->hasOne(Category::class);
+        return $this->belongsTo((Category::class));
+    }
 }

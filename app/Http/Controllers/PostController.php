@@ -146,7 +146,13 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        // testing proses hapus post
+        // dd("deleted");
+
+        $post->delete();
+        session()->flash('success', 'Post berhasil dihapus!');
+        
+        return redirect()->to('/posts');
     }
 
     // function untuk membuat validasi form

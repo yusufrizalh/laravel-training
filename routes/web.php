@@ -78,7 +78,7 @@ Route::post('/posts/store', 'PostController@store');    // proses menyimpan post
 Route::get('/posts/{post:slug}', 'PostController@show');    // model binding:slug
 Route::get('/posts/{post:slug}/edit', 'PostController@edit');   // membuka form edit post
 Route::patch('/posts/{post:slug}/edit', 'PostController@update');   // proses mengubah post
-
+Route::delete('/posts/{post:slug}/delete', 'PostController@destroy'); // proses menghapus post
 
 Route::view('articles/index', 'articles/index');
 Route::view('series/index', 'series/index');

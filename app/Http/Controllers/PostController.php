@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -30,7 +31,7 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('/posts/create');
+        return view('/posts/create', ['post' => new Post()]);
     }
 
     /**
@@ -47,7 +48,7 @@ class PostController extends Controller
           - $guarded    : semua input boleh diisi
     */
 
-    public function store()
+    public function store(PostRequest $request)
     {
         // $post = new Post();
         // $post->title = $request->title;
@@ -79,10 +80,10 @@ class PostController extends Controller
         // $attrs['slug'] = \Str::slug($request->title);
         // Post::create($attrs);
 
-        $attrs = request()->validate([
-            'title' => 'required|min:8|max:38',
-            'body' => 'required',
-        ]);
+        // $attrs = $this->validateRequest();
+
+        $attrs = $request->all();
+
         $attrs['slug'] = \Str::slug(request('title'));
         Post::create($attrs);
         session()->flash('success', 'Post berhasil disimpan!');
@@ -122,15 +123,14 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function update(Post $post)
+    public function update(Post $post, PostRequest $request)
     {
         // testing proses update
         // dd('berhasil update');
 
-        $attrs = request()->validate([
-            'title' => 'required|min:8|max:38',
-            'body' => 'required',
-        ]);
+        // $attrs = $this->validateRequest();
+
+        $attrs = $request->all();
 
         $post->update($attrs);
         session()->flash('success', 'Post berhasil diubah!');
@@ -148,4 +148,13 @@ class PostController extends Controller
     {
         //
     }
+
+    // function untuk membuat validasi form
+    // public function validateRequest()
+    // {
+    //     return request()->validate([
+    //         'title' => 'required|min:8|max:48',
+    //         'body' => 'required',
+    //     ]);
+    // }
 }

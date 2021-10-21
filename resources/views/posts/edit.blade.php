@@ -10,23 +10,7 @@
                         <form action="/posts/{{ $post->slug }}/edit" method="post" autocomplete="off">
                             @method('patch')
                             @csrf
-                            <div class="form-group">
-                                <label for="title">Title</label>
-                                <input type="text" name="title" id="title" class="form-control is-invalid"
-                                    value="{{ old('title') ?? $post->title }}">
-                                @error('title')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="title">Body</label>
-                                <textarea name="body" id="body"
-                                    class="form-control is-invalid">{{ old('body') ?? $post->body }}</textarea>
-                                @error('body')
-                                    {{ $message }}
-                                @enderror
-                            </div>
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            @include('partials/form-control')
                         </form>
                     </div>
                 </div>

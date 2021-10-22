@@ -6,7 +6,8 @@
     <div class="container">
         <h3>{{ $post->title }}</h3>
         <div class="text-secondary">
-            {{ $post->category->name }} &middot; {{ $post->updated_at->format('d M Y') }}
+            <a href="/categories/{{ $post->category->slug }}">{{ $post->category->name }}</a> &middot;
+            {{ $post->updated_at->format('d M Y') }}
         </div>
         <hr>
         <p>{{ $post->body }}</p>

@@ -12,7 +12,7 @@ class Post extends Model
     //     return $this->latest()->first();
     // }
 
-    protected $fillable = ['title', 'slug', 'body'];
+    protected $fillable = ['title', 'slug', 'body', 'category_id', 'user_id'];
     // protected $guarded = [];
 
     // membuat foreign key
@@ -20,5 +20,10 @@ class Post extends Model
     {
         // return $this->hasOne(Category::class);
         return $this->belongsTo((Category::class));
+    }
+
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

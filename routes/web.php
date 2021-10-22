@@ -2,10 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/kontak', function () {
     $nama = "Rizal";
     $teks = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
@@ -58,27 +54,15 @@ Route::get('/kontak', function () {
 
 Route::view('/galeri', 'galeri');
 
-// Route::get('/home', function () {
-//     $nama = request('nama');
-//     return view('home', ['nama' => $nama]);
-// });
-
-// Route::get('/home', 'HomeController');  // invokable
-// Route::get('/home/show', 'HomeController@show');
-
-// Route::get('/posts/{slug}', 'PostController@show');     // route wild-card
-// Route::get('/posts/{post}', 'PostController@show');     // model binding
-
-// urutan pemanggilan routes
-// men-generate artisan menggunakan -a (all) 
-
-Route::get('/posts', 'PostController@index');
-Route::get('/posts/create', 'PostController@create');    // membuka form create new post
-Route::post('/posts/store', 'PostController@store');    // proses menyimpan post
-Route::get('/posts/{post:slug}', 'PostController@show');    // model binding:slug
-Route::get('/posts/{post:slug}/edit', 'PostController@edit');   // membuka form edit post
-Route::patch('/posts/{post:slug}/edit', 'PostController@update');   // proses mengubah post
-Route::delete('/posts/{post:slug}/delete', 'PostController@destroy'); // proses menghapus post
+Route::prefix('/posts')->middleware('auth')->group(function () {
+    Route::get('/', 'PostController@index')->name('posts/index');
+    Route::get('create', 'PostController@create')->name('posts/crete');    // membuka form create new post
+    Route::post('store', 'PostController@store');    // proses menyimpan post
+    Route::get('{post:slug}', 'PostController@show');    // model binding:slug
+    Route::get('{post:slug}/edit', 'PostController@edit');   // membuka form edit post
+    Route::patch('{post:slug}/edit', 'PostController@update');   // proses mengubah post
+    Route::delete('{post:slug}/delete', 'PostController@destroy'); // proses menghapus post
+});
 
 Route::get('/categories/{category:slug}', 'CategoryController@show');
 

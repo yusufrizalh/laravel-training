@@ -12,9 +12,13 @@
         <hr>
         <p>{{ $post->body }}</p>
 
-        <form action="/posts/{{ $post->slug }}/delete" method="post">
-            @csrf
-            @method('delete')
+        <div>
+            <div class="text-secondary">
+                Written by {{ $post->author->name }}
+            </div>
+        </div>
+
+        @if (auth()->user()->is($post->author))
             <button type="button" class="btn btn-link btn-md text-danger" data-toggle="modal" data-target="#deleteModal">
                 Delete
             </button>
@@ -50,6 +54,6 @@
                     </div>
                 </div>
             </div>
-        </form>
+        @endif
     </div>
 @endsection

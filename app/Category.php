@@ -19,6 +19,8 @@ class Category extends Model
         # Many -> Post
     */
 
+    protected $fillable = ['name', 'slug'];
+
     // membuat foreign key
     public function posts()
     {

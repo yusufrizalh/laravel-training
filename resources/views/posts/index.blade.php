@@ -12,7 +12,11 @@
                 <hr>
             </div>
             <div>
-                <a href="/posts/create" class="btn btn-primary">New Post</a>
+                @if (Auth::check())
+                    <a href="/posts/create" class="btn btn-primary">New Post</a>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-primary">Login to Create New Post</a>
+                @endif
             </div>
         </div>
         <div class="row">
@@ -30,7 +34,9 @@
                             {{-- Published on {{ $post->created_at->format('d F Y') }} --}}
                             Published on {{ $post->updated_at->diffForHumans() }}
                             {{-- Updated on {{ $post->updated_at->diffForHumans() }} --}}
-                            <a href="/posts/{{ $post->slug }}/edit" class="btn btn-warning">Edit</a>
+                            @can('update', $post)
+                                <a href="/posts/{{ $post->slug }}/edit" class="btn btn-warning">Edit</a>
+                            @endcan
                         </div>
                     </div>
                 </div>

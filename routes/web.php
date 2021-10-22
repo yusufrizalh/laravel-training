@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/kontak', function () {
     $nama = "Rizal";
@@ -63,8 +63,8 @@ Route::view('/galeri', 'galeri');
 //     return view('home', ['nama' => $nama]);
 // });
 
-Route::get('/home', 'HomeController');  // invokable
-Route::get('/home/show', 'HomeController@show');
+// Route::get('/home', 'HomeController');  // invokable
+// Route::get('/home/show', 'HomeController@show');
 
 // Route::get('/posts/{slug}', 'PostController@show');     // route wild-card
 // Route::get('/posts/{post}', 'PostController@show');     // model binding
@@ -84,3 +84,7 @@ Route::get('/categories/{category:slug}', 'CategoryController@show');
 
 Route::view('articles/index', 'articles/index');
 Route::view('series/index', 'series/index');
+
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
